@@ -35,7 +35,12 @@ Student_Projects/
 │   ├── proposal_template.md      copy this to projects/<lastname>_<topic>/proposal.md
 │   ├── CLAUDE.md                 copy this into your project folder so Claude Code knows the grid
 │   ├── environment.yml           the mamba environment every project starts from
-│   └── slurm_job.sh              a SLURM job script that runs a Python script on the grid
+│   ├── slurm_job.sh              a SLURM job script that runs a Python script on the grid
+│   └── ssh_config                the ~/.ssh/config entry that makes `ssh grid` work
+├── tools/grid.sh                 run / sync / submit / wait / pull, the five remote calls a project needs
+├── .claude/
+│   ├── settings.json             commands Claude may run without asking (git, python, ssh grid, rsync)
+│   └── commands/                 /grid-status, /grid-submit, /grid-pull, /new-project
 ├── examples/
 │   └── pelvic_width_dimorphism/  the demo study, end to end, with its results
 └── projects/
@@ -50,5 +55,7 @@ Student_Projects/
   environment pinned in `environment.yml`.
 - **One project, one folder, one branch per piece of work.** Never commit to `main` directly.
 - **Cite the dataset** you used, by its DOI, in anything you write or present.
+- **Nothing heavy runs on the login node, and job scripts are files, never heredocs.**
+  `templates/CLAUDE.md` says why; `tools/grid.sh` makes the right thing the easy thing.
 
 Questions: Gregory Schwing, gregory.schwing@med.wayne.edu.

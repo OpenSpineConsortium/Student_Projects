@@ -37,7 +37,10 @@
 Claude Code is the assistant you will write most of your code with. Copy
 `templates/CLAUDE.md` into your project folder and edit the paths; it tells Claude how the
 grid works, where the data is, and which rules never to break. Claude drafts, you read. You
-run `sbatch` yourself, and you look at every figure before you believe it.
+run `sbatch` yourself (or say "submit it" and Claude runs exactly that one command), and you
+look at every figure before you believe it. The repository's `.claude/` folder gives Claude the
+`/grid-status`, `/grid-submit`, `/grid-pull` and `/new-project` commands and pre-approves the
+routine tools; `tools/grid.sh` is what those commands call.
 
 ## Authorship
 
