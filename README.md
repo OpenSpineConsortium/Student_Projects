@@ -3,11 +3,14 @@
 Student research projects on the consortium's open datasets. One folder per project,
 reviewed by pull request, tracked in ClickUp once approved.
 
-**Start here:** the [OSC Primer](https://openspineconsortium.github.io/onboarding/) walks a
-student with no coding experience from an empty laptop to a finished population-level study:
-installing VS Code and Claude Code, getting onto the WSU grid, downloading
-CTSpinoPelvic1K, running the demo study in this repository, and proposing a project of your
-own.
+**Start here:** [GETTING_STARTED.md](GETTING_STARTED.md) is seven steps: three installs,
+clone this repository, open it in VS Code, type `claude` and then `/onboard`. Claude reads
+the `CLAUDE.md` at the root of this repository and does the rest with you: the grid
+connection, the environment and the dataset on the grid (as jobs), the demo study, and a
+project chosen from [projects/IDEAS.md](projects/IDEAS.md) and written up as a proposal.
+The three grid steps that need your university identity (account, Google Authenticator,
+SSH key) are spelled out there. The long-form version, with the reasons behind each step,
+is the [OSC Primer](https://openspineconsortium.github.io/onboarding/).
 
 ## How a project moves
 
@@ -29,6 +32,8 @@ is the pull request every proposal should imitate.
 ```
 Student_Projects/
 ├── README.md                     this file
+├── GETTING_STARTED.md            the seven steps from an empty laptop; then /onboard
+├── CLAUDE.md                     read by Claude Code in every session: the lab in one page
 ├── CONTRIBUTING.md               the pull-request procedure and house rules
 ├── .github/PULL_REQUEST_TEMPLATE.md
 ├── templates/
@@ -36,14 +41,17 @@ Student_Projects/
 │   ├── CLAUDE.md                 copy this into your project folder so Claude Code knows the grid
 │   ├── environment.yml           the mamba environment every project starts from
 │   ├── slurm_job.sh              a SLURM job script that runs a Python script on the grid
+│   ├── make_env.sh               a job that installs Miniforge if needed and builds `osc`
+│   ├── get_dataset.sh            a job that fetches the v10 labels and metadata from Hugging Face
 │   └── ssh_config                the ~/.ssh/config entry that makes `ssh grid` work
 ├── tools/grid.sh                 run / sync / submit / wait / pull, the five remote calls a project needs
 ├── .claude/
 │   ├── settings.json             commands Claude may run without asking (git, python, ssh grid, rsync)
-│   └── commands/                 /grid-status, /grid-submit, /grid-pull, /new-project
+│   └── commands/                 /onboard, /grid-status, /grid-submit, /grid-pull, /new-project
 ├── examples/
 │   └── pelvic_width_dimorphism/  the demo study, end to end, with its results
 └── projects/
+    ├── IDEAS.md                  twenty-odd project ideas with the measurement, comparison and difficulty
     └── <lastname>_<topic>/       one folder per project
 ```
 

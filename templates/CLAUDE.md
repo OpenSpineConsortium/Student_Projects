@@ -25,8 +25,10 @@ thanks to `~/.ssh/config` (see `templates/ssh_config`). My AccessID: **EDIT: you
 My clone of this repository on the grid: `~/Student_Projects`. My copy of the dataset on the
 grid: **EDIT: ~/data/CTSpinoPelvic1K** (the folder holding `labels/`, `manifest.json`,
 `dataset_labels.json`; ask the lead whether a shared copy exists before downloading 195 GB
-of CT). Python on the grid: mambaforge in `~/mambaforge` with an environment named `osc`
-built from `templates/environment.yml`. Containers: `module load singularity` (3.5.2).
+of CT; `templates/get_dataset.sh` fetches the labels as a job). Python on the grid:
+Miniforge in `~/miniforge3` (the lead's older install is `~/mambaforge`; check both) with an
+environment named `osc` built from `templates/environment.yml` by `templates/make_env.sh`.
+Containers: `module load singularity` (3.5.2).
 Nextflow is available in `~/.local/bin` for pipelines but is not needed for a first project.
 
 ## Rules that never bend

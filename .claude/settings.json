@@ -31,6 +31,10 @@
       "Bash(tools/grid.sh *)",
       "Bash(ssh -o BatchMode=yes grid *)",
       "Bash(ssh grid *)",
+      "Bash(ssh-keygen *)",
+      "Bash(ssh-copy-id *)",
+      "Bash(ssh -V)",
+      "Bash(claude --version)",
       "Bash(rsync *)",
       "Bash(scp *)",
       "Bash(wsl -e bash -lc *)"
