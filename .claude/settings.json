@@ -48,6 +48,8 @@
     ],
     "deny": [
       "Bash(rm -rf /*)",
+      "Bash(gh repo delete *)",
+      "Bash(gh repo edit *)",
       "Bash(git push --force *)",
       "Bash(git reset --hard *)"
     ]
