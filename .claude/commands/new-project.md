@@ -1,7 +1,25 @@
 Start a new project folder for: $ARGUMENTS
 
-1. Ask me for my last name and a two-or-three-word topic if they are not in the arguments, and form the folder name `projects/<lastname>_<topic>` in lower case with underscores.
-2. Create a branch `proposal/<lastname>-<topic>` from `main`.
-3. Create the folder with: `proposal.md` copied from `templates/proposal_template.md`, `CLAUDE.md` copied from `templates/CLAUDE.md` with the EDIT lines filled from what I tell you, `JOURNAL.md` with today's date and one line, and empty `results/` and `figures/` folders (with a `.gitkeep` each).
-4. Walk me through the proposal one section at a time, asking one question per section, and write my answers into `proposal.md` in full sentences. For section 3, insist on label identifiers, an axis and a unit for every measurement, and check the identifiers against `dataset_labels.json` if the dataset is on this machine.
-5. When every section is filled, show me the whole proposal, then commit it with the message `Proposal: <title>` and push the branch. Tell me to open the pull request on GitHub and fill in the template, including the email for my ClickUp invitation.
+Projects live in `projects/`, which is its own private git repository (OpenSpineConsortium/Projects)
+cloned inside this public one. Every git command below runs inside `projects/`.
+
+1. Check `projects/.git` exists; if not, run `gh repo clone OpenSpineConsortium/Projects projects`
+   (if that fails with not found, I have not been added yet: tell me to email my GitHub
+   username to gregory.schwing@med.wayne.edu, subject "Projects access", and stop).
+2. Ask me for my last name and a two-or-three-word topic if they are not in the arguments,
+   and form the folder name `<lastname>_<topic>` in lower case with underscores.
+3. In `projects/`: `git pull`, then create a branch `proposal/<lastname>-<topic>` from `main`.
+4. Create the folder with: `proposal.md` copied from `templates/proposal_template.md`,
+   `CLAUDE.md` copied from `templates/CLAUDE.md` with the EDIT lines filled from what I
+   tell you, `JOURNAL.md` with today's date and one line, and empty `results/` and
+   `figures/` folders (with a `.gitkeep` each).
+5. Walk me through the proposal one section at a time, asking one question per section,
+   and write my answers into `proposal.md` in full sentences. If I chose an entry from
+   `IDEAS.md`, start from its measurement and comparison. For section 3, insist on label
+   identifiers, an axis and a unit for every measurement, and check the identifiers against
+   `dataset_labels.json` if the dataset is on this machine.
+6. When every section is filled, show me the whole proposal, then commit it in `projects/`
+   with the message `Proposal: <title>` and push the branch. Open the pull request with
+   `gh pr create --fill --base main` in `projects/`, then edit its body to the template
+   (`projects/.github/PULL_REQUEST_TEMPLATE.md`), asking me for the email for my ClickUp
+   invitation and the mentor I am requesting. Show me the PR link.

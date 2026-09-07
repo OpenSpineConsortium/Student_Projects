@@ -35,6 +35,13 @@
       "Bash(ssh-copy-id *)",
       "Bash(ssh -V)",
       "Bash(claude --version)",
+      "Bash(code --version)",
+      "Bash(code --install-extension *)",
+      "Bash(gh *)",
+      "Bash(hf auth *)",
+      "Bash(huggingface-cli *)",
+      "Bash(brew install *)",
+      "Bash(winget install *)",
       "Bash(rsync *)",
       "Bash(scp *)",
       "Bash(wsl -e bash -lc *)"

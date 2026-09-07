@@ -12,7 +12,7 @@ anything, and read `GETTING_STARTED.md` if the student is new.
 If there is no `projects/<lastname>_*` folder yet, or the student says they are new, offer
 to run `/onboard`. It checks the laptop tools, sets up the SSH connection to the grid,
 builds the `osc` environment and fetches the dataset on the grid as SLURM jobs, runs the
-demo study, and then helps choose a project from `projects/IDEAS.md` and write the
+demo study, and then helps choose a project from `IDEAS.md` and write the
 proposal with `/new-project`. It is resumable: every step first checks whether it is
 already done.
 
@@ -46,7 +46,8 @@ On Windows the network commands run through Git Bash or `wsl -e bash -lc '...'`.
 | the five remote calls | `tools/grid.sh` (run, sync, submit, wait, pull) |
 | slash commands | `.claude/commands/` (`/onboard`, `/grid-status`, `/grid-submit`, `/grid-pull`, `/new-project`) |
 | the demo study | `examples/pelvic_width_dimorphism/` |
-| project ideas | `projects/IDEAS.md` |
+| project ideas | `IDEAS.md` |
+| the projects themselves | `projects/`, a clone of the PRIVATE repository OpenSpineConsortium/Projects; it is ignored by this public repository, and every commit, branch, push and pull request for a project happens inside it |
 | proposal template and procedure | `templates/proposal_template.md`, `CONTRIBUTING.md` |
 | the primer | https://openspineconsortium.github.io/onboarding/ |
 

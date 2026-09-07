@@ -2,14 +2,18 @@
 
 ## Proposing a project
 
-1. Clone the repository (you will have been added as a collaborator after emailing the
-   project lead; see the [primer](https://openspineconsortium.github.io/onboarding/)).
-2. Create a branch named `proposal/<lastname>-<topic>`, for example
+1. Clone this public repository, then clone the private
+   [Projects](https://github.com/OpenSpineConsortium/Projects) repository inside it as
+   `projects/` (`gh repo clone OpenSpineConsortium/Projects projects`). You will have been
+   added as a collaborator after emailing the project lead your GitHub username; `/onboard`
+   in Claude Code does both clones.
+2. Inside `projects/`, create a branch named `proposal/<lastname>-<topic>`, for example
    `proposal/schwing-pelvic-width-dimorphism`.
 3. Copy `templates/proposal_template.md` to `projects/<lastname>_<topic>/proposal.md` and
    fill it in. Keep it to about one page. Every section of the template exists because a
    reviewer will ask about it.
-4. Push the branch and open a pull request. The PR template asks for three things beyond
+4. Push the branch and open a pull request in Projects (private, so only collaborators see
+   it). The PR template asks for three things beyond
    the proposal: the email address that should receive the ClickUp invitation, the mentor
    you are requesting, and a checklist confirming you have run the demo study.
 5. The review happens in the PR thread. Expect questions about the measurement (what

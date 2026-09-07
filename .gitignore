@@ -15,3 +15,6 @@ __pycache__/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# the private Projects repository is cloned here; it is its own git repository
+projects/

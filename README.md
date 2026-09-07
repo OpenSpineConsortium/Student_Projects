@@ -1,13 +1,17 @@
 # OpenSpineConsortium · Student_Projects
 
-Student research projects on the consortium's open datasets. One folder per project,
-reviewed by pull request, tracked in ClickUp once approved.
+Student research projects on the consortium's open datasets. This public repository holds
+everything reusable: onboarding, templates, tools, the demo study and the ideas list. The
+projects themselves live in a private repository,
+[OpenSpineConsortium/Projects](https://github.com/OpenSpineConsortium/Projects), cloned
+inside this one as `projects/`, so a proposal is reviewed by pull request among
+collaborators and stays private until it is published.
 
 **Start here:** [GETTING_STARTED.md](GETTING_STARTED.md) is seven steps: three installs,
 clone this repository, open it in VS Code, type `claude` and then `/onboard`. Claude reads
 the `CLAUDE.md` at the root of this repository and does the rest with you: the grid
 connection, the environment and the dataset on the grid (as jobs), the demo study, and a
-project chosen from [projects/IDEAS.md](projects/IDEAS.md) and written up as a proposal.
+project chosen from [IDEAS.md](IDEAS.md) and written up as a proposal.
 The three grid steps that need your university identity (account, Google Authenticator,
 SSH key) are spelled out there. The long-form version, with the reasons behind each step,
 is the [OSC Primer](https://openspineconsortium.github.io/onboarding/).
@@ -18,14 +22,14 @@ is the [OSC Primer](https://openspineconsortium.github.io/onboarding/).
 |---|---|---|
 | 1. Read the primer and run the demo study | you | `examples/pelvic_width_dimorphism/` |
 | 2. Write a one-page proposal from the template | you | `templates/proposal_template.md` |
-| 3. Open a pull request adding `projects/<lastname>_<topic>/proposal.md` | you | GitHub, using the PR template |
-| 4. Review, questions, revisions in the PR thread | mentor and you | GitHub |
+| 3. Open a pull request adding `<lastname>_<topic>/proposal.md` in the private Projects repository (`projects/`) | you | GitHub, using the PR template; `/new-project` does it |
+| 4. Review, questions, revisions in the PR thread | mentor and you | GitHub (private) |
 | 5. Approval, merge, ClickUp invitation to the email in your PR | mentor | ClickUp |
-| 6. Work in your project folder on a branch; milestones tracked in ClickUp | you | this repo and ClickUp |
-| 7. Results, figure code and a write-up in the same folder; final PR | you | this repo |
+| 6. Work in your project folder on a branch; milestones tracked in ClickUp | you | `projects/` and ClickUp |
+| 7. Results, figure code and a write-up in the same folder; final PR | you | `projects/` |
 
-The worked example, [projects/schwing_pelvic_width_dimorphism](projects/schwing_pelvic_width_dimorphism/),
-is the pull request every proposal should imitate.
+The worked example, [examples/proposal_example/proposal.md](examples/proposal_example/proposal.md),
+is the proposal every new one should imitate.
 
 ## Layout
 
@@ -48,10 +52,11 @@ Student_Projects/
 ├── .claude/
 │   ├── settings.json             commands Claude may run without asking (git, python, ssh grid, rsync)
 │   └── commands/                 /onboard, /grid-status, /grid-submit, /grid-pull, /new-project
+├── IDEAS.md                      twenty-odd project ideas with the measurement, comparison and difficulty
 ├── examples/
-│   └── pelvic_width_dimorphism/  the demo study, end to end, with its results
-└── projects/
-    ├── IDEAS.md                  twenty-odd project ideas with the measurement, comparison and difficulty
+│   ├── pelvic_width_dimorphism/  the demo study, end to end, with its results
+│   └── proposal_example/         the worked example proposal
+└── projects/                     NOT part of this repository: the private Projects repo, cloned here
     └── <lastname>_<topic>/       one folder per project
 ```
 

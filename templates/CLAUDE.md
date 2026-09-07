@@ -60,9 +60,11 @@ Nextflow is available in `~/.local/bin` for pipelines but is not needed for a fi
 
 Code moves through git; data stays on the grid; results come back small.
 
-1. **Edit locally, commit, push.** `git add`, `git commit -m "<what and why>"`,
-   `wsl -e bash -lc 'cd <repo> && git push'`.
-2. **Sync the grid clone.** `ssh -o BatchMode=yes grid "cd ~/Student_Projects && git pull -q"`.
+1. **Edit locally, commit, push.** `projects/` is its own private git repository inside
+   the public one, so run git there: `cd projects && git add <files> && git commit -m "<what and why>" && git push`
+   (on Windows through `wsl -e bash -lc '...'` if plain git push fails).
+2. **Sync the grid clone.** `ssh -o BatchMode=yes grid "cd ~/Student_Projects && git pull -q && cd projects && git pull -q"`
+   (`tools/grid.sh sync` does both).
 3. **Submit from the repo root on the grid**, so `SLURM_SUBMIT_DIR` is the repo:
    `ssh -o BatchMode=yes grid "cd ~/Student_Projects && mkdir -p logs && sbatch templates/slurm_job.sh projects/<me>/measure.py --data ~/data/CTSpinoPelvic1K --out projects/<me>/results --workers 8"`.
    `sbatch` prints `Submitted batch job <id>`; record the id in `JOURNAL.md`.

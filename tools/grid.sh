@@ -24,7 +24,7 @@ case "$cmd" in
   run)
     "${SSH[@]}" "$*" ;;
   sync)
-    "${SSH[@]}" "cd ~/$REPO && git pull -q && git log --oneline -1" ;;
+    "${SSH[@]}" "cd ~/$REPO && git pull -q && git log --oneline -1 && if [ -d projects/.git ]; then (cd projects && git pull -q && git log --oneline -1); fi" ;;
   submit)
     script="${1:?job script, e.g. templates/slurm_job.sh}"; shift
     out=$("${SSH[@]}" "cd ~/$REPO && mkdir -p logs && sbatch $script $*")

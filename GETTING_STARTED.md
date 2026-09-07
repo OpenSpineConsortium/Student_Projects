@@ -1,97 +1,68 @@
-# Getting started, from an empty laptop
+# Getting started
 
-Seven steps you do; everything after that Claude does with you. Budget an afternoon, plus
-the two business days the grid takes to create an account.
+One command sets up your laptop and starts Claude Code on the onboarding walkthrough.
+Budget an afternoon, plus the two business days the grid takes to create an account.
 
-## 1. Three installs
+## Before the command: two accounts
 
-| what | macOS / Linux | Windows |
-|---|---|---|
-| Visual Studio Code | [code.visualstudio.com](https://code.visualstudio.com/) | same |
-| Git | `xcode-select --install` (macOS) or your package manager | [git-scm.com](https://git-scm.com/download/win), keep "Git Bash" checked |
-| Claude Code | `curl -fsSL https://claude.ai/install.sh \| bash` | PowerShell: `irm https://claude.ai/install.ps1 \| iex` |
+1. **Claude.** Make an account at [claude.ai](https://claude.ai) and subscribe to
+   **Claude Pro** (about $20 a month). Claude Code, the assistant that writes and runs
+   your code, is included in Pro. Ask your mentor before choosing anything larger.
+2. **GitHub.** Make a free account at [github.com](https://github.com) with your name in
+   the profile, then email your GitHub username to gregory.schwing@med.wayne.edu with the
+   subject "Projects access". You will be added to the private repository where proposals
+   live.
 
-Then install the **Claude Code** extension inside VS Code. Ask your mentor which Claude plan
-the lab uses before buying anything.
+## The command
 
-## 2. Clone this repository and open it
+Open a terminal (macOS: Terminal; Windows: PowerShell; Linux: your terminal) and paste:
 
-```bash
-git clone https://github.com/OpenSpineConsortium/Student_Projects.git
-cd Student_Projects
-code .
-```
+| | |
+|---|---|
+| macOS, Linux, WSL | `curl -fsSL https://openspineconsortium.com/onboard.sh \| bash` |
+| Windows PowerShell | `irm https://openspineconsortium.com/onboard.ps1 \| iex` |
 
-(You need to be a collaborator: email your GitHub username to
-gregory.schwing@med.wayne.edu with the subject "Student_Projects access".)
+It installs what is missing (Git, the GitHub CLI, VS Code with the Claude Code extension,
+Claude Code), clones this repository into `~/OpenSpineConsortium/Student_Projects`, and
+starts Claude on `/onboard`. Sign in to Claude when the browser opens. From then on Claude
+asks you one thing at a time and does the rest: your GitHub sign-in, a Hugging Face account
+and token, the SSH key for the grid, the environment and dataset on the grid (as jobs),
+the demo study, and a project chosen from `IDEAS.md` and written up as a proposal. Every
+step checks whether it is already done, so you can close the terminal and run the command
+again later; it picks up where you were.
 
-## 3. Start Claude and type `/onboard`
+## The three things only you can do
 
-In the VS Code terminal (`Ctrl` + `` ` ``), type `claude`, sign in when the browser opens,
-then type:
+Claude will stop and tell you exactly when each is needed.
 
-```
-/onboard
-```
+1. **A grid account.** Apply with your AccessID through
+   [tech.wayne.edu/kb/high-performance-computing](https://tech.wayne.edu/kb/high-performance-computing)
+   (the "Grid account request" form), naming **Gregory Schwing** as sponsor, and email him
+   that you applied. Usually two business days. Questions: hpc@wayne.edu, (313) 577-4743.
+2. **Google Authenticator.** The grid uses it (not Microsoft Authenticator) as its second
+   factor. Install the app, connect to the WSU VPN, log in to
+   [ondemand.grid.wayne.edu](https://ondemand.grid.wayne.edu), open **Interactive Apps →
+   2FA Setup**, launch it and scan the QR code.
+   [C&IT's article with screenshots](https://services.wayne.edu/TDClient/277/Portal/KB/Article/20242).
+3. **One password-and-code login.** Claude makes an SSH key and installs it on the grid
+   with one command that asks for your grid password and the six-digit code, once. After
+   that the grid never prompts again, which is what lets Claude drive it for you.
 
-Claude reads `CLAUDE.md` at the root of this repository, which carries the whole lab
-workflow, and the `/onboard` command walks you through everything below: it checks your
-tools, sets up the grid connection, builds your environment on the grid as a job, fetches
-the dataset, runs the demo study, and then helps you choose a project from
-`projects/IDEAS.md` and write the proposal. You can stop and resume at any step; it checks
-what is already done.
+## Without the command
 
-The three grid steps need you, because they involve your university identity.
-
-## 4. Get a grid account
-
-The WSU Grid is the university's HPC cluster. Apply with your AccessID through the
-C&IT High Performance Computing pages, [tech.wayne.edu/kb/high-performance-computing](https://tech.wayne.edu/kb/high-performance-computing)
-(the "Grid account request" form), naming **Gregory Schwing** as sponsor, and email him
-that you applied. Accounts are usually created within two business days. Questions:
-hpc@wayne.edu, (313) 577-4743.
-
-## 5. Set up Google Authenticator
-
-The grid uses Google Authenticator (not Microsoft Authenticator) for its second factor.
-Install the app on your phone, connect to the WSU VPN, log in to
-[ondemand.grid.wayne.edu](https://ondemand.grid.wayne.edu) with your AccessID and
-password, open **Interactive Apps → 2FA Setup**, launch it, and scan the QR code with the
-app. From then on a password login to the grid asks for the six-digit code.
-Instructions with screenshots: [How do I set up and use Google Authenticator for the Grid?](https://services.wayne.edu/TDClient/277/Portal/KB/Article/20242)
-
-## 6. Make an SSH key, so the code is asked only once
-
-Claude drives the grid with non-interactive `ssh` commands, and those cannot answer a
-two-factor prompt. An SSH key logs you in without password or code. `/onboard` runs these
-for you, but they are here so you know what happens:
-
-```bash
-ssh-keygen -t ed25519 -C "youraccessid@wayne.edu"        # Enter at every prompt
-ssh-copy-id youraccessid@grid.wayne.edu                    # password + Authenticator code, once
-ssh -o BatchMode=yes youraccessid@grid.wayne.edu hostname  # prints "warrior" with no prompt
-```
-
-and a `~/.ssh/config` entry (`templates/ssh_config`) so that `ssh grid` is enough. On
-Windows, Claude runs `ssh` from Git Bash or WSL; the key lives in that home directory.
-
-## 7. Tell Claude your AccessID, and let it finish
-
-Back in `/onboard`, give Claude your AccessID. It will test the connection, clone this
-repository on the grid, submit a job that builds the `osc` environment
-(`templates/make_env.sh`), submit a job that downloads the dataset labels and manifest
-(`templates/get_dataset.sh`, 1.1 GB, or use the lab's shared copy if your mentor gives you
-a path), run the demo study on ten records and then on all 802, and open
-`projects/IDEAS.md` with you to choose a project.
+If you would rather do it by hand, the [OSC Primer](https://openspineconsortium.github.io/onboarding/)
+walks through every step with the reasons, and `/onboard` in Claude Code still works from
+any clone of this repository.
 
 ## What "done" looks like
 
-- `ssh -o BatchMode=yes grid hostname` prints `warrior`
-- `ssh grid "source ~/miniforge3/etc/profile.d/conda.sh && conda activate osc && python -c 'import nibabel'"` prints nothing
+- `ssh -o BatchMode=yes grid hostname` prints `warrior` with no prompt
+- `gh auth status` says you are logged in, and `projects/` is a clone of the private
+  Projects repository
 - `~/data/CTSpinoPelvic1K/labels` on the grid holds 802 files
 - `examples/pelvic_width_dimorphism/results/report.txt` on the grid matches the one in
   this repository to the second decimal
-- a branch `proposal/<lastname>-<topic>` with `proposal.md`, opened as a pull request
+- a branch `proposal/<lastname>-<topic>` in `projects/`, opened as a pull request
 
 If any step fails, paste the error to Claude and say which step you were on. If Claude is
 stuck, email your mentor with the same paste.
