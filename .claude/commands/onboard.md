@@ -7,6 +7,19 @@ verify afterwards. If something fails, show me the error in plain words and one 
 try; if it fails twice, write what happened to `ONBOARDING_LOG.md` and move to the next
 step so I can email my mentor the log. Optional argument: $ARGUMENTS (my AccessID, if I gave it).
 
+## Step 0. How much Claude asks
+Explain in three sentences: this repository's shared settings already accept file edits
+automatically and pre-approve the lab's commands (git, python, ssh to the grid, rsync, the
+GitHub and Hugging Face tools), so most of the time nothing is asked; anything outside that
+list produces a yes/no prompt, and answering "Yes, and don't ask again" makes it permanent
+for this repository. Then offer the hands-off option: setting `permissions.defaultMode` to
+`bypassPermissions` in my user settings (`~/.claude/settings.json`) means Claude never asks
+before running a command on this laptop; the shared deny list (force-push, hard reset,
+deleting a repository) still applies, and `/permissions` undoes it. If I say yes, merge
+`{"permissions": {"defaultMode": "bypassPermissions"}}` into that file with a small Python
+snippet that preserves any existing keys, show me the result, and tell me it takes effect
+when Claude is next started. If I say no, move on; the defaults are fine.
+
 ## Step 1. Laptop tools
 Run `git --version`, `gh --version`, `claude --version`, `ssh -V`, and `code --version`.
 Say which are missing and install each (macOS: brew; Windows: winget; Linux: apt/dnf), or

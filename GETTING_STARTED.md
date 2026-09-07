@@ -48,6 +48,16 @@ Claude will stop and tell you exactly when each is needed.
    with one command that asks for your grid password and the six-digit code, once. After
    that the grid never prompts again, which is what lets Claude drive it for you.
 
+## About the yes/no prompts
+
+Claude Code asks before it runs a command it has not been told to trust. This repository
+ships shared settings that accept file edits automatically and pre-approve everything the
+lab workflow uses, so most of the time it does not ask. When it does, "Yes, and don't ask
+again" makes that answer permanent for this repository. If you would rather it never asked
+on your laptop, `/onboard` offers to switch your own settings to `bypassPermissions` at the
+start and explains what that means; the deny list (force-push, hard reset, deleting a
+repository) still applies, and `/permissions` turns it back.
+
 ## Without the command
 
 If you would rather do it by hand, the [OSC Primer](https://openspineconsortium.github.io/onboarding/)
