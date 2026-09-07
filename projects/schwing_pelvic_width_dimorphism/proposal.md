@@ -11,11 +11,11 @@
 The female pelvis is wider than the male pelvis; every anatomy text says so, and forensic
 anthropology sexes skeletons on it. What the texts rarely give is the size of the
 difference in living adults measured the same way on the same scanner protocol, and whether
-it survives normalization to the rest of the skeleton. CTSpinoPelvic1K labels the two hip
-bones and the first sacral segment on one coordinate frame in 802 adults, so the width of
-the pelvis and the width of the sacrum it sits on are available in every record. The
-sentence I hope to write: "Relative to the width of S1, the female pelvis is X percent wider
-than the male pelvis, with an effect size of d, in 738 adults over 50."
+it survives normalization to the rest of the skeleton. CTSpinoPelvic1K labels both femora and
+every lumbar vertebra on one coordinate frame in 802 adults, so how far apart the hip joints
+sit, and the size of the skeleton they sit on, are available in every record. The sentence I
+hope to write: "Relative to vertebral body width, the female hip joints sit X percent further
+apart than the male, with an effect size of d, in about 730 adults over 50."
 
 ## 2. What is already known
 
@@ -31,29 +31,34 @@ segmented separately.
 
 | measurement | from identifiers | how | unit |
 |---|---|---|---|
-| bi-iliac width | 30 (left hip), 31 (right hip) | left–right extent of the union of both hip labels, along the axis the affine marks L/R | mm |
-| S1 width | 29 (S1) | left–right extent of the S1 label | mm |
-| relative pelvic width | 30, 31, 29 | bi-iliac width divided by S1 width | none |
+| bi-iliac width (the naive comparison) | 30 (left hip), 31 (right hip) | left–right extent of the union of both hip labels, along the axis the affine marks L/R | mm |
+| femoral head centre | 32 (left femur), 33 (right femur) | centroid of the medial-most 28 mm of the top 30 mm of each femur label: the head, not the greater trochanter | mm, world coordinates |
+| femoral head distance | 32, 33 | Euclidean distance between the two head centres (the bicoxofemoral axis) | mm |
+| outer width on that axis | 32, 33 | the bicoxofemoral line extended outward through each femur mask to its last voxel, outer edge to outer edge | mm |
+| vertebral body width | 23 (L4), else 24 (L5) | left–right extent of the anterior 18 mm of the vertebra label, which is the body without the transverse processes or facets | mm |
+| relative hip separation | 32, 33, 23 | femoral head distance divided by vertebral body width | none |
 
-The extent is the number of voxel columns occupied along the left–right axis times the
-voxel size on that axis, so it is a maximal width, including the iliac crests where they
-are in the field of view.
+Extents are voxel counts along an axis times the voxel size on that axis; axes and their
+directions are read from each file's affine, never assumed. The bi-iliac width is kept as
+the first thing anyone would try, so the write-up can show why it fails.
 
 ## 4. Who is compared
 
 Grouped by `sex` from `manifest.json` (393 female, 345 male; 11 "other" and 53 missing are
 listed in the CSV and excluded from the test). Excluded: the 11 records with surgical
-hardware (`hardware_labelled`), because eight carry hip arthroplasties, and any record whose
-S1 label is absent (one). Prone and supine records are pooled for a width measured
-perpendicular to gravity, which posture does not change; the CSV keeps `position` so that
-claim can be checked.
+hardware (`hardware_labelled`), because eight carry hip arthroplasties, and any record
+lacking either femoral head or an L4/L5 label. Prone and supine records are pooled for
+distances measured between bones, which posture does not change; the CSV keeps `position`
+so that claim can be checked.
 
 ## 5. Analysis plan
 
-Means and standard deviations by sex for the absolute and relative widths; Welch's t test
-on the relative width; Cohen's d as the effect size; a two-panel box-and-dot figure
-(absolute, relative). If the relative difference survives, a secondary check regresses
-relative width on age within each sex to see whether it drifts across the 50 to 89 range.
+Means, medians and standard deviations by sex for every measurement; Welch's t test and
+Cohen's d for the relative hip separation; a three-panel box-and-dot figure (pelvis width
+absolute, hip joint separation absolute, separation relative to skeletal size). The
+expectation from the literature is that the absolute separation differs little between the
+sexes while the male skeleton is larger, so the relative separation is higher in females.
+If that holds, a secondary check regresses relative separation on age within each sex.
 About 730 records analyzed after exclusions.
 
 ## 6. Outputs
@@ -75,8 +80,9 @@ an abstract for the medical student research day.
 
 ## 8. What could go wrong
 
-A hip label that is cut by the field of view at the iliac crest would under-measure the
-width; I will flag records whose hip label touches the volume edge and report the analysis
-with and without them. A misplaced S1 carve would distort the denominator; the dataset's
-quality-control table flags 100 such records and I will report the result with those
-excluded as well.
+A femur label cut by the field of view below the head would still carry the head, but a
+femur absent altogether removes the record; I will report how many. A head centroid pulled
+toward the trochanter would inflate the separation, so I will check the head distances
+against the 150 to 190 mm range and look at every outlier. The body-width proxy runs about
+5 mm wider than the release's endplate widths on a validation sample; the ratio, not the
+absolute width, is the endpoint, and the proxy is applied identically to both sexes.
